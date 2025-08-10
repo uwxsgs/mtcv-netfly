@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müslüm Tavacı - Software Developer</title>
+    
+    <meta name="theme-color" content="#0d1117">
+    <meta name="description" content="The portfolio of Müslüm Tavacı, a Software Developer specializing in secure, high-performance applications.">
+    
+    <!-- Styles and Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Styles */
+        :root {
+            --bg-color: #0d1117;
+            --primary-color: #58a6ff;
+            --secondary-color: #1f6feb;
+            --text-color: #c9d1d9;
+            --border-color: #30363d;
+            --glow-color: rgba(88, 166, 255, 0.5);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .font-fira {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .glass-effect {
+            background: rgba(16, 20, 25, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px var(--glow-color);
+        }
+        
+        .skill-tag {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            transform: scale(1.05);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); }
+
+        /* Terminal-like animation */
+        .typewriter-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid var(--primary-color);
+            animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-color); } }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="webgl-canvas"></canvas>
+    
+    <div id="notification" class="notification glass-effect text-green-400 border border-green-500"></div>
+
+    <div class="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
+        <main class="w-full max-w-6xl mx-auto space-y-16">
+
+            <!-- Header / Hero Section -->
+            <header class="text-center md:text-left grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2 space-y-4">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tighter">Müslüm Tavacı</h1>
+                    <h2 class="text-2xl md:text-3xl font-fira text-blue-400 typewriter-text">&gt; Software Developer</h2>
+                    <div class="pt-4 max-w-3xl fade-in-up" style="animation-delay: 2.5s;">
+                         <p class="text-lg text-gray-400">A Software Developer driven by a deep curiosity for how systems work. I specialize in building secure, high-performance applications by understanding them from the ground up. My focus is on writing clean, resilient code and architecting robust systems.</p>
+                    </div>
+                     <div class="pt-6 fade-in-up" style="animation-delay: 2.8s;">
+                        <a href="#projects" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg shadow-blue-500/20">View My Work</a>
+                        <a href="mailto:msl.tvc@gmail.com" class="ml-4 inline-block text-blue-400 font-bold py-3 px-6 rounded-lg border border-blue-400 hover:bg-blue-400 hover:text-gray-900 transition-colors duration-300">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex justify-center items-center">
+                    <div class="w-48 h-48 rounded-full glass-effect p-1 border-2 border-blue-500/50 shadow-2xl shadow-blue-500/20">
+                        <img src="https://i.imgur.com/qWpHffv.jpeg" alt="Müslüm Tavacı" class="w-full h-full rounded-full object-cover">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Projects Section -->
+            <section id="projects" class="space-y-12">
+                <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Projects</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.2s;">
+                        <h4 class="text-xl font-bold text-blue-300 mb-2">Custom Network Proxy & Protocol Analyzer</h4>
+                        <p class="text-sm text-gray-400 mb-4">Developed a high-performance network proxy in Go to intercept and analyze custom TCP protocols, identifying several protocol-level security flaws for a financial sector client.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Go</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Protocol Analysis</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Security</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Wireshark</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.4s;">
+                        <h4 class="text-xl font-bold text-blue-300 mb-2">Cloud Security Posture Management (CSPM)</h4>
+                        <p class="text-sm text-gray-400 mb-4">Engineered a tool in Python to automate security audits of AWS & GCP environments against CIS benchmarks, with a plugin system for custom checks and Terraform integration.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Python</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">AWS</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">GCP</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Terraform</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">CI/CD</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.6s;">
+                        <h4 class="text-xl font-bold text-blue-300 mb-2">eBPF-based Network Monitoring Agent</h4>
+                        <p class="text-sm text-gray-400 mb-4">Developed a high-performance network monitoring agent in Go and C using eBPF to capture kernel-level traffic with minimal overhead, streaming metrics to Prometheus & Grafana.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Go</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">C</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">eBPF</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Linux</span>
+                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Prometheus</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills & Education Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <!-- Skills -->
+                <section id="skills" class="lg:col-span-2 space-y-8">
+                     <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-fira text-lg text-blue-300 mb-3">Programming Languages</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Python</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Go</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">JavaScript</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">TypeScript</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Java</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">SQL</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">C</span>
+                            </div>
+                        </div>
+                         <div>
+                            <h4 class="font-fira text-lg text-blue-300 mb-3">Cloud & DevOps</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">AWS (EC2, S3, Lambda)</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GCP</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Docker</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Kubernetes</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Terraform</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">CI/CD</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GitHub Actions</span>
+                            </div>
+                        </div>
+                         <div>
+                            <h4 class="font-fira text-lg text-blue-300 mb-3">Web Technologies</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">React.js</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Node.js</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Express.js</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">HTML5</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">CSS3</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">RESTful APIs</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GraphQL</span>
+                            </div>
+                        </div>
+                         <div>
+                            <h4 class="font-fira text-lg text-blue-300 mb-3">Security & Systems</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Reverse Engineering</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Protocol Analysis</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Fuzzing</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Ghidra</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Wireshark</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">eBPF</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">System Design</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Cryptography</span>
+                            </div>
+                        </div>
+                         <div>
+                            <h4 class="font-fira text-lg text-blue-300 mb-3">Databases</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">PostgreSQL</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">MongoDB</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Redis</span>
+                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Education -->
+                <section id="education" class="space-y-8">
+                     <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Education</h3>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-blue-300">Bachelor of Science in Computer Science</h4>
+                        <p class="text-gray-400">Dokuz Eylül University</p>
+                        <p class="text-sm text-gray-500">2012 - 2016, Izmir, Turkey</p>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Contact Footer -->
+            <footer class="text-center py-12 border-t border-gray-800">
+                <p class="text-lg text-gray-400 mb-4">Interested in collaborating? Let's connect.</p>
+                <div class="flex justify-center items-center gap-4">
+                    <p id="email" class="text-xl font-fira text-blue-400">msl.tvc@gmail.com</p>
+                    <button id="copy-email-btn" title="Copy email to clipboard" class="p-2 rounded-md hover:bg-gray-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </button>
+                </div>
+                 <p class="text-xs text-gray-600 mt-8">&copy; 2025 Müslüm Tavacı. Designed with a passion for code.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Interactive WebGL Background ---
+            let scene, camera, renderer, particles;
+            const canvas = document.getElementById('webgl-canvas');
+
+            function initWebGL() {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 50;
+                
+                renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                const particleCount = 5000;
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+
+                for (let i = 0; i < particleCount * 3; i++) {
+                    positions[i] = (Math.random() - 0.5) * 200;
+                }
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                
+                // Use the custom icon for particles
+                const textureLoader = new THREE.TextureLoader();
+                const particleTexture = textureLoader.load('https://i.imgur.com/KSSqxZz.png');
+
+                const material = new THREE.PointsMaterial({
+                    size: 1.5,
+                    map: particleTexture,
+                    transparent: true,
+                    alphaTest: 0.5,
+                    blending: THREE.AdditiveBlending,
+                    color: 0x58a6ff
+                });
+
+                particles = new THREE.Points(geometry, material);
+                scene.add(particles);
+
+                animate();
+            }
+
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / 100;
+                mouseY = (event.clientY - window.innerHeight / 2) / 100;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particles.rotation.x += 0.0001;
+                particles.rotation.y += 0.0002;
+
+                camera.position.x += (mouseX - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            window.addEventListener('resize', onWindowResize, false);
+
+            initWebGL();
+
+            // --- Sound Effects ---
+            const synth = new Tone.Synth({
+                oscillator: { type: 'sine' },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
+            }).toDestination();
+            
+            const copySynth = new Tone.Synth({
+                oscillator: { type: 'triangle' },
+                envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 }
+            }).toDestination();
+
+            // --- Interactive Elements ---
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    synth.triggerAttackRelease('C4', '8n');
+                });
+            });
+            
+            // Notification handler
+            const notification = document.getElementById('notification');
+            function showNotification(message) {
+                notification.textContent = message;
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            // Copy email functionality
+            const copyBtn = document.getElementById('copy-email-btn');
+            const emailText = document.getElementById('email').textContent;
+            copyBtn.addEventListener('click', () => {
+                const textArea = document.createElement('textarea');
+                textArea.value = emailText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showNotification('Email copied to clipboard!');
+                    copySynth.triggerAttackRelease('E5', '16n', Tone.now());
+                    copySynth.triggerAttackRelease('G5', '16n', Tone.now() + 0.1);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    showNotification('Failed to copy email.');
+                }
+                document.body.removeChild(textArea);
+            });
+
+            // Fade-in animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-card, #skills > div, #education > div, footer').forEach((el, index) => {
+                el.dataset.delay = `${index * 0.1}s`;
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
