@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark"> <!-- Start in dark mode by default -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,21 +16,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom Styles */
+        /* Custom Styles with Theme Variables */
         :root {
-            --bg-color: #0d1117;
-            --primary-color: #58a6ff;
-            --secondary-color: #1f6feb;
-            --text-color: #c9d1d9;
-            --border-color: #30363d;
-            --glow-color: rgba(88, 166, 255, 0.5);
+            /* Light Mode Variables */
+            --bg-color-light: #f3f4f6;
+            --text-color-light: #111827;
+            --primary-color-light: #2563eb;
+            --secondary-color-light: #4f46e5;
+            --border-color-light: #d1d5db;
+            --glass-bg-light: rgba(255, 255, 255, 0.6);
+            --glow-color-light: rgba(37, 99, 235, 0.3);
+            --header-text-light: #111827;
+            --subheader-text-light: #4f46e5;
+            --project-title-light: #1d4ed8;
+            --skill-bg-light: #e5e7eb;
+            --skill-border-light: #d1d5db;
+            --skill-hover-bg-light: var(--primary-color-light);
+            --skill-hover-text-light: #ffffff;
         }
 
+        html.dark {
+            /* Dark Mode Variables */
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --primary-color: #58a6ff;
+            --secondary-color: #1f6feb;
+            --border-color: #30363d;
+            --glass-bg: rgba(16, 20, 25, 0.6);
+            --glow-color: rgba(88, 166, 255, 0.5);
+            --header-text: #ffffff;
+            --subheader-text: #60a5fa;
+            --project-title: #93c5fd;
+            --skill-bg: #1f2937;
+            --skill-border: #374151;
+            --skill-hover-bg: var(--primary-color);
+            --skill-hover-text: #0d1117;
+        }
+        
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-color, var(--bg-color-light));
+            color: var(--text-color, var(--text-color-light));
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         #webgl-canvas {
@@ -48,10 +76,11 @@
         }
         
         .glass-effect {
-            background: rgba(16, 20, 25, 0.6);
+            background: var(--glass-bg, var(--glass-bg-light));
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color, var(--border-color-light));
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .section-card {
@@ -60,37 +89,39 @@
 
         .section-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px var(--glow-color);
+            box-shadow: 0 10px 30px -10px var(--glow-color, var(--glow-color-light));
         }
         
         .skill-tag {
+            background-color: var(--skill-bg, var(--skill-bg-light));
+            border: 1px solid var(--skill-border, var(--skill-border-light));
             transition: all 0.2s ease-in-out;
             cursor: pointer;
         }
 
         .skill-tag:hover {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
+            background-color: var(--skill-hover-bg, var(--skill-hover-bg-light));
+            color: var(--skill-hover-text, var(--skill-hover-text-light));
             transform: scale(1.05);
         }
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); }
+        ::-webkit-scrollbar-track { background: var(--bg-color, var(--bg-color-light)); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color, var(--border-color-light)); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary-color, var(--secondary-color-light)); }
 
-        /* Terminal-like animation */
+        /* Typewriter Animation */
         .typewriter-text {
             display: inline-block;
             overflow: hidden;
             white-space: nowrap;
-            border-right: .15em solid var(--primary-color);
+            border-right: .15em solid var(--primary-color, var(--primary-color-light));
             animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
         }
 
         @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-color); } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-color, var(--primary-color-light)); } }
         
         .fade-in-up {
             opacity: 0;
@@ -113,11 +144,62 @@
         }
         
         .notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* Themed Text Colors */
+        h1, h3 {
+             color: var(--header-text, var(--header-text-light));
+        }
+        h2.typewriter-text {
+            color: var(--subheader-text, var(--subheader-text-light));
+        }
+        .section-card h4 {
+            color: var(--project-title, var(--project-title-light));
+        }
+        #skills h4, #education h4 {
+            color: var(--project-title, var(--project-title-light));
+        }
+        
+        /* Theme Switcher Styles */
+        #theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            background-color: var(--glass-bg, var(--glass-bg-light));
+            border: 1px solid var(--border-color, var(--border-color-light));
+            transition: background-color 0.3s ease;
+        }
+        #theme-switcher:hover {
+            background-color: var(--secondary-color, var(--secondary-color-light));
+        }
+        #theme-switcher svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text-color, var(--text-color-light));
+        }
+        .dark #sun-icon { display: block; }
+        .dark #moon-icon { display: none; }
+        html:not(.dark) #sun-icon { display: none; }
+        html:not(.dark) #moon-icon { display: block; }
+
     </style>
 </head>
 <body class="antialiased">
 
     <canvas id="webgl-canvas"></canvas>
+
+    <!-- Theme Switcher -->
+    <button id="theme-switcher" title="Toggle theme">
+        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25c0 5.385 4.365 9.75 9.75 9.75 2.57 0 4.885-.992 6.697-2.648z" />
+        </svg>
+    </button>
     
     <div id="notification" class="notification glass-effect text-green-400 border border-green-500"></div>
 
@@ -127,8 +209,8 @@
             <!-- Header / Hero Section -->
             <header class="flex flex-col-reverse md:flex-row gap-8 items-center text-center md:text-left">
                 <div class="flex-grow space-y-4">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tighter">Müslüm Tavacı</h1>
-                    <h2 class="text-2xl md:text-3xl font-fira text-blue-400 typewriter-text">&gt; Software Developer</h2>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tighter">Müslüm Tavacı</h1>
+                    <h2 class="text-2xl md:text-3xl font-fira typewriter-text">&gt; Software Developer</h2>
                     <div class="pt-4 max-w-3xl fade-in-up" style="animation-delay: 2.5s;">
                          <p class="text-lg text-gray-400">A Software Developer driven by a deep curiosity for how systems work. I specialize in building secure, high-performance applications by understanding them from the ground up. My focus is on writing clean, resilient code and architecting robust systems.</p>
                     </div>
@@ -146,44 +228,44 @@
 
             <!-- Projects Section -->
             <section id="projects" class="space-y-12">
-                <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Projects</h3>
+                <h3 class="text-3xl font-bold font-fira tracking-wider border-b-2 border-blue-500/50 pb-2">// Projects</h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project 1 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.2s;">
-                        <h4 class="text-xl font-bold text-blue-300 mb-2">Custom Network Proxy & Protocol Analyzer</h4>
+                        <h4 class="text-xl font-bold mb-2">Custom Network Proxy & Protocol Analyzer</h4>
                         <p class="text-sm text-gray-400 mb-4">Developed a high-performance network proxy in Go to intercept and analyze custom TCP protocols, identifying several protocol-level security flaws for a financial sector client.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Go</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Protocol Analysis</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Security</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Wireshark</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Go</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Protocol Analysis</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Security</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Wireshark</span>
                         </div>
                     </div>
                     
                     <!-- Project 2 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.4s;">
-                        <h4 class="text-xl font-bold text-blue-300 mb-2">Cloud Security Posture Management (CSPM)</h4>
+                        <h4 class="text-xl font-bold mb-2">Cloud Security Posture Management (CSPM)</h4>
                         <p class="text-sm text-gray-400 mb-4">Engineered a tool in Python to automate security audits of AWS & GCP environments against CIS benchmarks, with a plugin system for custom checks and Terraform integration.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Python</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">AWS</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">GCP</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Terraform</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">CI/CD</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Python</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">AWS</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">GCP</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Terraform</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">CI/CD</span>
                         </div>
                     </div>
 
                     <!-- Project 3 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.6s;">
-                        <h4 class="text-xl font-bold text-blue-300 mb-2">eBPF-based Network Monitoring Agent</h4>
+                        <h4 class="text-xl font-bold mb-2">eBPF-based Network Monitoring Agent</h4>
                         <p class="text-sm text-gray-400 mb-4">Developed a high-performance network monitoring agent in Go and C using eBPF to capture kernel-level traffic with minimal overhead, streaming metrics to Prometheus & Grafana.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Go</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">C</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">eBPF</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Linux</span>
-                            <span class="skill-tag bg-gray-700 text-xs font-fira p-2 rounded">Prometheus</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Go</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">C</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">eBPF</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Linux</span>
+                            <span class="skill-tag text-xs font-fira p-2 rounded">Prometheus</span>
                         </div>
                     </div>
                 </div>
@@ -193,64 +275,64 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
                 <!-- Skills -->
                 <section id="skills" class="lg:col-span-2 space-y-8">
-                     <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Skills</h3>
+                     <h3 class="text-3xl font-bold font-fira tracking-wider border-b-2 border-blue-500/50 pb-2">// Skills</h3>
                     <div class="space-y-6">
                         <div>
-                            <h4 class="font-fira text-lg text-blue-300 mb-3">Programming Languages</h4>
+                            <h4 class="font-fira text-lg mb-3">Programming Languages</h4>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Python</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Go</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">JavaScript</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">TypeScript</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Java</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">SQL</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">C</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Python</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Go</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">JavaScript</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">TypeScript</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Java</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">SQL</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">C</span>
                             </div>
                         </div>
                          <div>
-                            <h4 class="font-fira text-lg text-blue-300 mb-3">Cloud & DevOps</h4>
+                            <h4 class="font-fira text-lg mb-3">Cloud & DevOps</h4>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">AWS (EC2, S3, Lambda)</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GCP</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Docker</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Kubernetes</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Terraform</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">CI/CD</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GitHub Actions</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">AWS (EC2, S3, Lambda)</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">GCP</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Docker</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Kubernetes</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Terraform</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">CI/CD</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">GitHub Actions</span>
                             </div>
                         </div>
                          <div>
-                            <h4 class="font-fira text-lg text-blue-300 mb-3">Web Technologies</h4>
+                            <h4 class="font-fira text-lg mb-3">Web Technologies</h4>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">React.js</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Node.js</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Express.js</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">HTML5</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">CSS3</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">RESTful APIs</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">GraphQL</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">React.js</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Node.js</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Express.js</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">HTML5</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">CSS3</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">RESTful APIs</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">GraphQL</span>
                             </div>
                         </div>
                          <div>
-                            <h4 class="font-fira text-lg text-blue-300 mb-3">Security & Systems</h4>
+                            <h4 class="font-fira text-lg mb-3">Security & Systems</h4>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Reverse Engineering</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Protocol Analysis</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Fuzzing</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Ghidra</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Wireshark</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">eBPF</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">System Design</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Cryptography</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Reverse Engineering</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Protocol Analysis</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Fuzzing</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Ghidra</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Wireshark</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">eBPF</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">System Design</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Cryptography</span>
                             </div>
                         </div>
                          <div>
-                            <h4 class="font-fira text-lg text-blue-300 mb-3">Databases</h4>
+                            <h4 class="font-fira text-lg mb-3">Databases</h4>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">PostgreSQL</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">MongoDB</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">Redis</span>
-                                <span class="skill-tag bg-gray-800 text-sm font-medium py-2 px-4 rounded-lg border border-gray-700">MySQL</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">PostgreSQL</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">MongoDB</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">Redis</span>
+                                <span class="skill-tag text-sm font-medium py-2 px-4 rounded-lg">MySQL</span>
                             </div>
                         </div>
                     </div>
@@ -258,9 +340,9 @@
                 
                 <!-- Education -->
                 <section id="education" class="space-y-8">
-                     <h3 class="text-3xl font-bold font-fira text-white tracking-wider border-b-2 border-blue-500/50 pb-2">// Education</h3>
+                     <h3 class="text-3xl font-bold font-fira tracking-wider border-b-2 border-blue-500/50 pb-2">// Education</h3>
                     <div class="glass-effect p-6 rounded-lg">
-                        <h4 class="text-lg font-bold text-blue-300">Bachelor of Science in Computer Science</h4>
+                        <h4 class="text-lg font-bold">Bachelor of Science in Computer Science</h4>
                         <p class="text-gray-400">Dokuz Eylül University</p>
                         <p class="text-sm text-gray-500">2012 - 2016, Izmir, Turkey</p>
                     </div>
@@ -288,6 +370,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Switcher Logic ---
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const htmlEl = document.documentElement;
+
+            // Apply saved theme on load
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            htmlEl.classList.add(savedTheme);
+            if (savedTheme === 'dark') {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d1117');
+            } else {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f3f4f6');
+            }
+
+
+            themeSwitcher.addEventListener('click', () => {
+                if (htmlEl.classList.contains('dark')) {
+                    htmlEl.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f3f4f6');
+                } else {
+                    htmlEl.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d1117');
+                }
+            });
+
+
             // --- Interactive WebGL Background ---
             let scene, camera, renderer, grid, movingShapes;
             const canvas = document.getElementById('webgl-canvas');
