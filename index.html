@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="dark"> <!-- Start in dark mode by default -->
+<html lang="en"> <!-- Default to light mode -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Müslüm Tavacı - Software Developer</title>
     
-    <meta name="theme-color" content="#0d1117">
+    <meta name="theme-color" content="#f8f9fa"> <!-- Light mode theme color -->
     <meta name="description" content="The portfolio of Müslüm Tavacı, a Software Developer specializing in secure, high-performance applications.">
     <link rel="icon" type="image/png" href="https://i.imgur.com/KSSqxZz.png">
     
@@ -18,21 +18,22 @@
     <style>
         /* Custom Styles with Theme Variables */
         :root {
-            /* Light Mode Variables */
-            --bg-color-light: #f3f4f6;
-            --text-color-light: #111827;
-            --primary-color-light: #2563eb;
-            --secondary-color-light: #4f46e5;
-            --border-color-light: #d1d5db;
-            --glass-bg-light: rgba(255, 255, 255, 0.6);
-            --glow-color-light: rgba(37, 99, 235, 0.3);
-            --header-text-light: #111827;
-            --subheader-text-light: #4f46e5;
-            --project-title-light: #1d4ed8;
-            --skill-bg-light: #e5e7eb;
-            --skill-border-light: #d1d5db;
+            /* Light Mode Variables (Improved) */
+            --bg-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --primary-color-light: #0056b3;
+            --secondary-color-light: #004085;
+            --border-color-light: #dee2e6;
+            --glass-bg-light: rgba(255, 255, 255, 0.7);
+            --glow-color-light: rgba(0, 86, 179, 0.25);
+            --header-text-light: #212529;
+            --subheader-text-light: #0056b3;
+            --project-title-light: #004085;
+            --skill-bg-light: #e9ecef;
+            --skill-border-light: #ced4da;
             --skill-hover-bg-light: var(--primary-color-light);
             --skill-hover-text-light: #ffffff;
+            --text-muted-light: #6c757d;
         }
 
         html.dark {
@@ -51,6 +52,7 @@
             --skill-border: #374151;
             --skill-hover-bg: var(--primary-color);
             --skill-hover-text: #0d1117;
+            --text-muted: #8b949e;
         }
         
         body {
@@ -152,13 +154,15 @@
         h2.typewriter-text {
             color: var(--subheader-text, var(--subheader-text-light));
         }
-        .section-card h4 {
-            color: var(--project-title, var(--project-title-light));
-        }
-        #skills h4, #education h4 {
+        .section-card h4, #skills h4, #education h4 {
             color: var(--project-title, var(--project-title-light));
         }
         
+        /* Light Mode Overrides for Tailwind classes */
+        .text-muted {
+            color: var(--text-muted, var(--text-muted-light));
+        }
+
         /* Theme Switcher Styles */
         #theme-switcher {
             position: fixed;
@@ -212,11 +216,11 @@
                     <h1 class="text-4xl md:text-6xl font-bold tracking-tighter">Müslüm Tavacı</h1>
                     <h2 class="text-2xl md:text-3xl font-fira typewriter-text">&gt; Software Developer</h2>
                     <div class="pt-4 max-w-3xl fade-in-up" style="animation-delay: 2.5s;">
-                         <p class="text-lg text-gray-400">A Software Developer driven by a deep curiosity for how systems work. I specialize in building secure, high-performance applications by understanding them from the ground up. My focus is on writing clean, resilient code and architecting robust systems.</p>
+                         <p class="text-lg text-muted">A Software Developer driven by a deep curiosity for how systems work. I specialize in building secure, high-performance applications by understanding them from the ground up. My focus is on writing clean, resilient code and architecting robust systems.</p>
                     </div>
                      <div class="pt-6 fade-in-up" style="animation-delay: 2.8s;">
                         <a href="#projects" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg shadow-blue-500/20">View My Work</a>
-                        <a href="mailto:msl.tvc@gmail.com" class="ml-4 inline-block text-blue-400 font-bold py-3 px-6 rounded-lg border border-blue-400 hover:bg-blue-400 hover:text-gray-900 transition-colors duration-300">Contact Me</a>
+                        <a href="mailto:msl.tvc@gmail.com" class="ml-4 inline-block text-blue-500 font-bold py-3 px-6 rounded-lg border border-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">Contact Me</a>
                     </div>
                 </div>
                 <div class="flex-shrink-0 flex justify-center items-center">
@@ -234,7 +238,7 @@
                     <!-- Project 1 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.2s;">
                         <h4 class="text-xl font-bold mb-2">Custom Network Proxy & Protocol Analyzer</h4>
-                        <p class="text-sm text-gray-400 mb-4">Developed a high-performance network proxy in Go to intercept and analyze custom TCP protocols, identifying several protocol-level security flaws for a financial sector client.</p>
+                        <p class="text-sm text-muted mb-4">Developed a high-performance network proxy in Go to intercept and analyze custom TCP protocols, identifying several protocol-level security flaws for a financial sector client.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-fira p-2 rounded">Go</span>
                             <span class="skill-tag text-xs font-fira p-2 rounded">Protocol Analysis</span>
@@ -246,7 +250,7 @@
                     <!-- Project 2 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.4s;">
                         <h4 class="text-xl font-bold mb-2">Cloud Security Posture Management (CSPM)</h4>
-                        <p class="text-sm text-gray-400 mb-4">Engineered a tool in Python to automate security audits of AWS & GCP environments against CIS benchmarks, with a plugin system for custom checks and Terraform integration.</p>
+                        <p class="text-sm text-muted mb-4">Engineered a tool in Python to automate security audits of AWS & GCP environments against CIS benchmarks, with a plugin system for custom checks and Terraform integration.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-fira p-2 rounded">Python</span>
                             <span class="skill-tag text-xs font-fira p-2 rounded">AWS</span>
@@ -259,7 +263,7 @@
                     <!-- Project 3 -->
                     <div class="section-card glass-effect p-6 rounded-lg fade-in-up" style="animation-delay: 0.6s;">
                         <h4 class="text-xl font-bold mb-2">eBPF-based Network Monitoring Agent</h4>
-                        <p class="text-sm text-gray-400 mb-4">Developed a high-performance network monitoring agent in Go and C using eBPF to capture kernel-level traffic with minimal overhead, streaming metrics to Prometheus & Grafana.</p>
+                        <p class="text-sm text-muted mb-4">Developed a high-performance network monitoring agent in Go and C using eBPF to capture kernel-level traffic with minimal overhead, streaming metrics to Prometheus & Grafana.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-fira p-2 rounded">Go</span>
                             <span class="skill-tag text-xs font-fira p-2 rounded">C</span>
@@ -343,22 +347,22 @@
                      <h3 class="text-3xl font-bold font-fira tracking-wider border-b-2 border-blue-500/50 pb-2">// Education</h3>
                     <div class="glass-effect p-6 rounded-lg">
                         <h4 class="text-lg font-bold">Bachelor of Science in Computer Science</h4>
-                        <p class="text-gray-400">Dokuz Eylül University</p>
-                        <p class="text-sm text-gray-500">2012 - 2016, Izmir, Turkey</p>
+                        <p class="text-muted">Dokuz Eylül University</p>
+                        <p class="text-sm text-muted">2012 - 2016, Izmir, Turkey</p>
                     </div>
                 </section>
             </div>
             
             <!-- Contact Footer -->
-            <footer class="text-center py-12 border-t border-gray-800">
-                <p class="text-lg text-gray-400 mb-4">Interested in collaborating? Let's connect.</p>
+            <footer class="text-center py-12 border-t" style="border-color: var(--border-color, var(--border-color-light));">
+                <p class="text-lg text-muted mb-4">Interested in collaborating? Let's connect.</p>
                 <div class="flex justify-center items-center gap-4">
-                    <p id="email" class="text-xl font-fira text-blue-400">msl.tvc@gmail.com</p>
-                    <button id="copy-email-btn" title="Copy email to clipboard" class="p-2 rounded-md hover:bg-gray-700 transition-colors">
+                    <p id="email" class="text-xl font-fira" style="color: var(--primary-color, var(--primary-color-light));">msl.tvc@gmail.com</p>
+                    <button id="copy-email-btn" title="Copy email to clipboard" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                     </button>
                 </div>
-                 <p class="text-xs text-gray-600 mt-8">&copy; 2025 Müslüm Tavacı. Designed with a passion for code.</p>
+                 <p class="text-xs text-muted mt-8">&copy; 2025 Müslüm Tavacı. Designed with a passion for code.</p>
             </footer>
 
         </main>
@@ -374,21 +378,21 @@
             const themeSwitcher = document.getElementById('theme-switcher');
             const htmlEl = document.documentElement;
 
-            // Apply saved theme on load
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            htmlEl.classList.add(savedTheme);
+            // Apply saved theme on load, defaulting to light
+            const savedTheme = localStorage.getItem('theme') || 'light';
             if (savedTheme === 'dark') {
+                htmlEl.classList.add('dark');
                 document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d1117');
             } else {
-                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f3f4f6');
+                htmlEl.classList.remove('dark');
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f8f9fa');
             }
-
 
             themeSwitcher.addEventListener('click', () => {
                 if (htmlEl.classList.contains('dark')) {
                     htmlEl.classList.remove('dark');
                     localStorage.setItem('theme', 'light');
-                    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f3f4f6');
+                    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f8f9fa');
                 } else {
                     htmlEl.classList.add('dark');
                     localStorage.setItem('theme', 'dark');
